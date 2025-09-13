@@ -1,0 +1,62 @@
+# Simple Student Wellness Monitoring (No imports)
+
+# Mood categories
+positive_moods = {"happy", "excited", "relaxed"}
+negative_moods = {"sad", "stressed", "anxious"}
+
+# Store moods
+mood_history = []
+
+def analyze_mood(mood):
+    mood = mood.lower()
+    if mood in positive_moods:
+        sentiment = "Positive"
+    elif mood in negative_moods:
+        sentiment = "Negative"
+    else:
+        sentiment = "Neutral"
+
+    recommendations = {
+        "Positive": "Great job! Keep maintaining healthy habits.",
+        "Negative": "Try relaxation exercises, journaling, or talking to a friend.",
+        "Neutral": "Stay mindful. A walk or a hobby might help boost your mood."
+    }
+    return sentiment, recommendations[sentiment]
+
+def show_history():
+    if not mood_history:
+        print("\nNo mood data available yet!")
+        return
+    print("\nMood History:")
+    for i, mood in enumerate(mood_history, 1):
+        print(f" Day {i}: {mood}")
+
+def main():
+    print("=== Student Wellness and Mental Health Monitoring ===")
+    
+    while True:
+        print("\nMenu:")
+        print("1. Enter today's mood")
+        print("2. Show mood history")
+        print("3. Exit")
+        choice = input("Choose an option (1-3): ")
+
+        if choice == "1":
+            mood = input("Enter your mood (Happy/Sad/Stressed/Excited/Anxious/Relaxed): ")
+            sentiment, recommendation = analyze_mood(mood)
+            mood_history.append(mood.capitalize())
+            print(f"\nSentiment: {sentiment}")
+            print(f"Recommendation: {recommendation}")
+
+        elif choice == "2":
+            show_history()
+
+        elif choice == "3":
+            print("\nGoodbye! Stay healthy and positive.")
+            break
+
+        else:
+            print("\nInvalid choice. Please try again.")
+
+if __name__== "__main__":
+    main()
